@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from siwedeeapp.views import hola
+from siwedeeapp.views import login
 
 urlpatterns = [
-    url(r'^hola/$',hola),
-    #url(r'^admin/', admin.site.urls),
+    url(r'^login/$',login),
+    url(r'^admin/', admin.site.urls),
 
 ]

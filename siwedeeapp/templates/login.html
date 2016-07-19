@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load staticfiles %}
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -14,17 +13,18 @@
 
 </head>
 <body>
-	<header>
-		<h4>Sistema Web de documentación de Estancias y Estadias</h4>
-	</header>
+
+	<div class="jumbotron">
+        <h2 align="center">Sistema Web de Documentación de Estancias y Estadias</h2>
+    </div>
 
 	<form id="login" method="post" action=""> {% csrf_token %}
-		<table>
+		<table class="table">
 			{{ form.as_table }}
 		</table>
-		<input type="submit" value="Sign in" />
+		<input type="submit" value="Sign in" class="btn btn-lg btn-default" />
 	</form>
 
-	
+
 </body>
 </html>

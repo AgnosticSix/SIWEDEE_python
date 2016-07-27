@@ -35,3 +35,42 @@ class CATEMPRESAS(models.Model):
 	TELEFONO = models.BigIntegerField(null=False)
 	DOMICILIO = models.CharField(max_length=120, null=False)
 	EMAIL = models.EmailField(null=False)
+
+class CATHISTREP(models.Model):
+	IDALUMNO = models.AutoField(primary_key=True)
+	FECHA_SUBIDA = models.DateField(null=False)
+	TIPO_REP = models.CharField(max_length=15, null=False)
+
+class CATMAESTROS(models.Model):
+	IDMAESTRO = models.AutoField(primary_key=True)
+	IDPERSONA = models.IntegerField(null=False)
+
+class CATPERSONAS(models.Model):
+	IDPERSONA = models.AutoField(primary_key=True)
+	IDTIPOPERSONA = models.IntegerField(null=True)
+	NOMBRE= models.CharField(max_length=50, null=False)
+	APELLIDO_PAT = models.CharField(max_length=50, null=False)
+	APELLIDO_MAT = models.CharField(max_length=50, null=True)
+	SEXO = models.CharField(max_length=1, null=False)
+	FECHA_NAC = models.DateField(null=False)
+	ACTIVO = models.BooleanField(null=False)
+
+class PERIODOESCOLAR(models.Model):
+	IDPERIODO = models.AutoField(primary_key=True)
+	NOMBRE = models.CharField(max_length=50, null=False)
+	FECHA_INI = models.DateField(null=False)
+	FECHA_FIN = models.DateField(null=False)
+
+class PROCESO(models.Model):
+	IDPROCESO = models.AutoField(primary_key=True)
+	ID_PERIODO = models.IntegerField(null=False)
+	NOMBRE = models.CharField(max_length=25)
+
+class TIPOPERSONA(models.Model):
+	IDTIPOPERSONA = models.AutoField(primary_key=True)
+	NOMBRE = models.CharField(max_length=30, null=False)
+
+class USUARIOS(models.Model):
+	IDPERSONA = models.AutoField(primary_key=True)
+	USUARIO = models.CharField(max_length=30, null=False)
+	PASSWORD = models.CharField(max_length=30, null=False)

@@ -12,10 +12,10 @@ def login(request):
 				username = request.POST['username']
 				password = request.POST['password']
 				valid = USUARIOS.objects.filter(USUARIO=username)
-				if password in valid  :
+				if len(valid)>0 and password==str(valid[0]):
 					return HttpResponseRedirect('siwedeeapp/sesion')	#retorna a una vista, no programada
-			except ValueError as e:
-				print( e )
+			except Exception:
+				print( 'Exception capturada' )
 	else:
 		form = LoginUsers()
 	return render(request,'login.html',{'form': form})

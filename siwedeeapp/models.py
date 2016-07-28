@@ -74,3 +74,6 @@ class USUARIOS(models.Model):
 	IDPERSONA = models.AutoField(primary_key=True)
 	USUARIO = models.CharField(max_length=30, null=False)
 	PASSWORD = models.CharField(max_length=30, null=False)
+
+	def __str__(self):
+		return self.PASSWORD

@@ -13,7 +13,7 @@ def login(request):
 				password = request.POST['password']
 				valid = USUARIOS.objects.filter(USUARIO=username)
 				if len(valid)>0 and password==str(valid[0]):
-					return HttpResponseRedirect('siwedeeapp/sesion')	#retorna a una vista, no programada
+					return HttpResponseRedirect('sesion')	#retorna a una vista, no programada
 			except Exception:
 				print( 'Exception capturada' )
 	else:

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from siwedeeapp.forms import LoginUsers
-from siwedeeapp.models import USUARIOS
+from siwedeeapp.models import CATPERSONAS
 # Create your views here.
 
 def login(request):
@@ -11,7 +11,7 @@ def login(request):
 			try:
 				username = request.POST['username']
 				password = request.POST['password']
-				valid = USUARIOS.objects.filter(USUARIO=username)
+				valid = CATPERSONAS.objects.filter(USUARIO=username)
 				if len(valid)>0 and password==str(valid[0]):
 					return HttpResponseRedirect('siwedeeapp/sesion')	#retorna a una vista, no programada
 			except Exception:

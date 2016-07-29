@@ -52,7 +52,8 @@ class CATPERSONAS(models.Model):
 	APELLIDO_PAT = models.CharField(max_length=50, null=False)
 	APELLIDO_MAT = models.CharField(max_length=50, null=True)
 	SEXO = models.CharField(max_length=1, null=False)
-	FECHA_NAC = models.DateField(null=False)
+	USUARIO = models.CharField(max_length=30, null=False)
+	PASSWORD = models.CharField(max_length=30, null=False)
 	ACTIVO = models.BooleanField(null=False)
 
 class PERIODOESCOLAR(models.Model):
@@ -69,11 +70,6 @@ class PROCESO(models.Model):
 class TIPOPERSONA(models.Model):
 	IDTIPOPERSONA = models.AutoField(primary_key=True)
 	NOMBRE = models.CharField(max_length=30, null=False)
-
-class USUARIOS(models.Model):
-	IDPERSONA = models.AutoField(primary_key=True)
-	USUARIO = models.CharField(max_length=30, null=False)
-	PASSWORD = models.CharField(max_length=30, null=False)
 
 	def __str__(self):
 		return self.PASSWORD

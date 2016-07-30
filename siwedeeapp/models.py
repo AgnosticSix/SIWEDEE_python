@@ -2,12 +2,24 @@ from django.db import models
 
 # Create your models here.
 
+<<<<<<< HEAD
 class CATALUMNO(models.Model):
 	IDALUMNO = models.AutoField(primary_key=True)
+=======
+class ASIGNA_EMPRESA(models.Model):
+    IDASIGNA = models.AutoField(primary_key=True)
+    IDEMPRESA = models.ForeignKey(CATEMPRESAS)
+    IDALUMNO = models.ForeignKey(CATALUMNOS)
+    FECHA_VINCU = models.DateField(null=False)
+    FECHA_CAMBIO = models.DateField(null=True)
+
+class CATALUMNOS(models.Model):
+	IDALUMNO = models.ForeignKey(CATALUMNOS)
+>>>>>>> 93048d8325bef80598ba6ebf3e9b449230a3d949
 	MATRICULA = models.IntegerField(null=False)
-	IDPROCESO = models.IntegerField(null=True)
-	IDCARRERA = models.IntegerField(null=True)
-	IDEMPRESA = models.IntegerField(null=True)
+	IDPROCESO = models.ForeignKey(PROCESO)
+	IDCARRERA = models.ForeignKey(CATCARRERAS)
+	IDEMPRESA = models.ForeignKey(CATEMPRESAS ,null=True)
 	ACTIVO = models.BooleanField(null=False)
 
 	def __str__(self):
@@ -15,7 +27,7 @@ class CATALUMNO(models.Model):
 
 class CATCALIFICACIONES(models.Model):
 	IDCALIF = models.AutoField(primary_key=True)
-	IDALUMNO = models.IntegerField(null=False)
+	IDALUMNO = models.ForeignKey(CATALUMNO)
 	CAL_AA  =  models.IntegerField(null=False)
 	CAL_AL = models.IntegerField(null=False)
 
@@ -36,17 +48,17 @@ class CATEMPRESAS(models.Model):
 		return self.IDEMPRESA
 
 class CATHISTREP(models.Model):
-	IDALUMNO = models.AutoField(primary_key=True)
+	IDALUMNO = models.ForeignKey(CATALUMNOS)
 	FECHA_SUBIDA = models.DateField(null=False)
 	TIPO_REP = models.CharField(max_length=15, null=False)
 
 class CATMAESTROS(models.Model):
 	IDMAESTRO = models.AutoField(primary_key=True)
-	IDPERSONA = models.IntegerField(null=False)
+	IDPERSONA = models.ForeignKey(CATPERSONAS)
 
 class CATPERSONAS(models.Model):
 	IDPERSONA = models.AutoField(primary_key=True)
-	IDTIPOPERSONA = models.IntegerField(null=True)
+	IDTIPOPERSONA = models.ForeignKey(TIPOPERSONA)
 	NOMBRE= models.CharField(max_length=50, null=False)
 	APELLIDO_PAT = models.CharField(max_length=50, null=False)
 	APELLIDO_MAT = models.CharField(max_length=50, null=True)
@@ -63,7 +75,7 @@ class PERIODOESCOLAR(models.Model):
 
 class PROCESO(models.Model):
 	IDPROCESO = models.AutoField(primary_key=True)
-	ID_PERIODO = models.IntegerField(null=False)
+	ID_PERIODO = models.ForeignKey(PERIODOESCOLAR)
 	NOMBRE = models.CharField(max_length=25)
 
 class ASIGNA_EMPRESA(models.Model):

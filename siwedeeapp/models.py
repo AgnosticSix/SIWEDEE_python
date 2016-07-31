@@ -15,6 +15,9 @@ class PERIODOESCOLAR(models.Model):
 	FECHA_INI = models.DateField(null=False)
 	FECHA_FIN = models.DateField(null=False)
 
+	def __str__(self):
+		return '%s %s'%(str(self.IDPERIODO), self.NOMBRE)
+
 class PROCESO(models.Model):
 	IDPROCESO = models.AutoField(primary_key=True)
 	ID_PERIODO = models.ForeignKey(PERIODOESCOLAR)
@@ -44,7 +47,7 @@ class CATEMPRESAS(models.Model):
 
 class CATALUMNOS(models.Model):
 	IDALUMNO = models.AutoField(primary_key=True)
-	MATRICULA = models.IntegerField(null=False)
+	MATRICULA = models.CharField(max_length=6, null=False)
 	IDPROCESO = models.ForeignKey(PROCESO)
 	IDCARRERA = models.ForeignKey(CATCARRERAS)
 	IDEMPRESA = models.ForeignKey(CATEMPRESAS)
@@ -52,7 +55,7 @@ class CATALUMNOS(models.Model):
 	ACTIVO = models.BooleanField(null=False)
 
 	def __str__(self):
-		return '%s '%(str(self.IDALUMNO), str(self.MATRICULA))
+		return '%s %s'%(str(self.IDALUMNO), self.MATRICULA)
 
 class CATCALIFICACIONES(models.Model):
 	IDCALIF = models.AutoField(primary_key=True)
@@ -82,6 +85,9 @@ class CATPERSONAS(models.Model):
 	USUARIO = models.CharField(max_length=30, null=False)
 	PASSWORD = models.CharField(max_length=30, null=False)
 	ACTIVO = models.BooleanField(null=False)
+
+	def __str__(self):
+		return '%s'%(str(self.IDPERSONA))
 
 class CATMAESTROS(models.Model):
 	IDMAESTRO = models.AutoField(primary_key=True)

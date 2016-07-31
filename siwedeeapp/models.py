@@ -6,6 +6,9 @@ class ESTATUS(models.Model):
 	IDESTATUS = models.AutoField(primary_key=True)
 	DESCRIPCION = models.CharField(max_length=50)
 
+	def __str__(self):
+		return '%s %s'%(str(self.IDESTATUS), self.DESCRIPCION)
+
 class PERIODOESCOLAR(models.Model):
 	IDPERIODO = models.AutoField(primary_key=True)
 	NOMBRE = models.CharField(max_length=50, null=False)
@@ -17,10 +20,16 @@ class PROCESO(models.Model):
 	ID_PERIODO = models.ForeignKey(PERIODOESCOLAR)
 	NOMBRE = models.CharField(max_length=30)
 
+	def __str__(self):
+		return '%s %s'%(str(self.IDPROCESO), self.NOMBRE)
+
 class CATCARRERAS(models.Model):
 	IDCARREA = models.AutoField(primary_key=True)
 	DESCRIPCION = models.CharField(max_length=50, null=False)
 	ABREVIATURA = models.CharField(max_length=12, null=False)
+
+	def __str__(self):
+		return '%s %s'%(str(self.IDCARREA), self.ABREVIATURA)
 
 class CATEMPRESAS(models.Model):
 	IDEMPRESA = models.AutoField(primary_key=True)
@@ -31,7 +40,7 @@ class CATEMPRESAS(models.Model):
 	EMAIL = models.EmailField(null=False)
 
 	def __str__(self):
-		return '%s'%(str(self.IDEMPRESA))
+		return '%s %s'%(str(self.IDEMPRESA), self.NOMBRE)
 
 class CATALUMNOS(models.Model):
 	IDALUMNO = models.AutoField(primary_key=True)
@@ -43,7 +52,7 @@ class CATALUMNOS(models.Model):
 	ACTIVO = models.BooleanField(null=False)
 
 	def __str__(self):
-		return '%s'%(str(self.IDALUMNO))
+		return '%s '%(str(self.IDALUMNO), str(self.MATRICULA))
 
 class CATCALIFICACIONES(models.Model):
 	IDCALIF = models.AutoField(primary_key=True)
@@ -59,6 +68,9 @@ class CATHISTREP(models.Model):
 class TIPOPERSONA(models.Model):
 	IDTIPOPERSONA = models.AutoField(primary_key=True)
 	NOMBRE = models.CharField(max_length=30, null=False)
+
+	def __str__(self):
+		return '%s %s'%(str(self.IDTIPOPERSONA), self.NOMBRE)
 
 class CATPERSONAS(models.Model):
 	IDPERSONA = models.AutoField(primary_key=True)

@@ -27,12 +27,12 @@ class PROCESO(models.Model):
 		return '%s %s'%(str(self.IDPROCESO), self.NOMBRE)
 
 class CATCARRERAS(models.Model):
-	IDCARREA = models.AutoField(primary_key=True)
+	IDCARRERA = models.AutoField(primary_key=True)
 	DESCRIPCION = models.CharField(max_length=50, null=False)
 	ABREVIATURA = models.CharField(max_length=12, null=False)
 
 	def __str__(self):
-		return '%s %s'%(str(self.IDCARREA), self.ABREVIATURA)
+		return '%s %s'%(str(self.IDCARRERA), self.ABREVIATURA)
 
 class CATEMPRESAS(models.Model):
 	IDEMPRESA = models.AutoField(primary_key=True)
@@ -46,7 +46,7 @@ class CATEMPRESAS(models.Model):
 		return '%s %s'%(str(self.IDEMPRESA), self.NOMBRE)
 
 class CATALUMNOS(models.Model):
-	IDALUMNO = models.AutoField(primary_key=True)
+	IDALUMNO = models.ForeignKey(IDPERSONA)
 	MATRICULA = models.CharField(max_length=6, null=False)
 	IDPROCESO = models.ForeignKey(PROCESO)
 	IDCARRERA = models.ForeignKey(CATCARRERAS)
@@ -62,6 +62,9 @@ class CATCALIFICACIONES(models.Model):
 	IDALUMNO = models.ForeignKey(CATALUMNOS)
 	CAL_AA  =  models.IntegerField(null=False)
 	CAL_AL = models.IntegerField(null=False)
+
+	def __str__(self):
+		return '%s %s'%(str(self.IDALUMNO), self.IDCALIF)
 
 class CATHISTREP(models.Model):
 	IDALUMNO = models.ForeignKey(CATALUMNOS)
@@ -87,11 +90,14 @@ class CATPERSONAS(models.Model):
 	ACTIVO = models.BooleanField(null=False)
 
 	def __str__(self):
-		return '%s'%(str(self.IDPERSONA))
+		return '%s %s'%(str(self.IDPERSONA), self.NOMBRE)
 
 class CATMAESTROS(models.Model):
 	IDMAESTRO = models.AutoField(primary_key=True)
 	IDPERSONA = models.ForeignKey(CATPERSONAS)
+
+	def __str__(self):
+		return '%s %s'%(str(self.IDMAESTRO), self.IDPERSONA)
 
 class ASIGNA_EMPRESA(models.Model):
     IDASIGNA = models.AutoField(primary_key=True)
@@ -99,3 +105,6 @@ class ASIGNA_EMPRESA(models.Model):
     IDALUMNO = models.ForeignKey(CATALUMNOS)
     FECHA_VINCU = models.DateField(null=False)
     FECHA_CAMBIO = models.DateField(null=True)
+
+    def __str__(self):
+		return '%s %s %s'%(str(self.IDASIGNA), (self.IDEMPRESA), self.IDALUMNO)

@@ -52,18 +52,6 @@ class TIPOPERSONA(models.Model):
 	def __str__(self):
 		return '%s %s'%(str(self.IDTIPOPERSONA), self.NOMBRE)
 
-class CATALUMNOS(models.Model):
-	IDALUMNO = models.ForeignKey(IDPERSONA, primary_key=True)
-	MATRICULA = models.CharField(max_length=6, null=False)
-	IDPROCESO = models.ForeignKey(PROCESO)
-	IDCARRERA = models.ForeignKey(CATCARRERAS)
-	IDEMPRESA = models.ForeignKey(CATEMPRESAS)
-	IDESTATUS = models.ForeignKey(ESTATUS)
-	ACTIVO = models.BooleanField(null=False)
-
-	def __str__(self):
-		return '%s %s'%(str(self.IDALUMNO), self.MATRICULA)
-
 class CATPERSONAS(models.Model):
 	IDPERSONA = models.AutoField(primary_key=True)
 	IDTIPOPERSONA = models.ForeignKey(TIPOPERSONA)
@@ -77,6 +65,19 @@ class CATPERSONAS(models.Model):
 
 	def __str__(self):
 		return '%s %s'%(str(self.IDPERSONA), self.NOMBRE)
+
+class CATALUMNOS(models.Model):
+	IDALUMNO = models.ForeignKey(CATPERSONAS, primary_key=True)
+	MATRICULA = models.CharField(max_length=6, null=False)
+	IDPROCESO = models.ForeignKey(PROCESO)
+	IDCARRERA = models.ForeignKey(CATCARRERAS)
+	IDEMPRESA = models.ForeignKey(CATEMPRESAS)
+	IDESTATUS = models.ForeignKey(ESTATUS)
+	ACTIVO = models.BooleanField(null=False)
+
+	def __str__(self):
+		return '%s %s'%(str(self.IDALUMNO), self.MATRICULA)
+
 
 class CATCALIFICACIONES(models.Model):
 	IDCALIF = models.AutoField(primary_key=True)

@@ -45,8 +45,15 @@ class CATEMPRESAS(models.Model):
 	def __str__(self):
 		return '%s %s'%(str(self.IDEMPRESA), self.NOMBRE)
 
+class TIPOPERSONA(models.Model):
+	IDTIPOPERSONA = models.AutoField(primary_key=True)
+	NOMBRE = models.CharField(max_length=30, null=False)
+
+	def __str__(self):
+		return '%s %s'%(str(self.IDTIPOPERSONA), self.NOMBRE)
+
 class CATALUMNOS(models.Model):
-	IDALUMNO = models.ForeignKey(IDPERSONA)
+	IDALUMNO = models.ForeignKey(IDPERSONA, primary_key=True)
 	MATRICULA = models.CharField(max_length=6, null=False)
 	IDPROCESO = models.ForeignKey(PROCESO)
 	IDCARRERA = models.ForeignKey(CATCARRERAS)
@@ -56,27 +63,6 @@ class CATALUMNOS(models.Model):
 
 	def __str__(self):
 		return '%s %s'%(str(self.IDALUMNO), self.MATRICULA)
-
-class CATCALIFICACIONES(models.Model):
-	IDCALIF = models.AutoField(primary_key=True)
-	IDALUMNO = models.ForeignKey(CATALUMNOS)
-	CAL_AA  =  models.IntegerField(null=False)
-	CAL_AL = models.IntegerField(null=False)
-
-	def __str__(self):
-		return '%s %s'%(str(self.IDALUMNO), self.IDCALIF)
-
-class CATHISTREP(models.Model):
-	IDALUMNO = models.ForeignKey(CATALUMNOS)
-	FECHA_SUBIDA = models.DateField(null=False)
-	TIPO_REP = models.CharField(max_length=20, null=False)
-
-class TIPOPERSONA(models.Model):
-	IDTIPOPERSONA = models.AutoField(primary_key=True)
-	NOMBRE = models.CharField(max_length=30, null=False)
-
-	def __str__(self):
-		return '%s %s'%(str(self.IDTIPOPERSONA), self.NOMBRE)
 
 class CATPERSONAS(models.Model):
 	IDPERSONA = models.AutoField(primary_key=True)
@@ -92,6 +78,21 @@ class CATPERSONAS(models.Model):
 	def __str__(self):
 		return '%s %s'%(str(self.IDPERSONA), self.NOMBRE)
 
+class CATCALIFICACIONES(models.Model):
+	IDCALIF = models.AutoField(primary_key=True)
+	IDALUMNO = models.ForeignKey(CATALUMNOS)
+	CAL_AA  =  models.IntegerField(null=False)
+	CAL_AL = models.IntegerField(null=False)
+
+	def __str__(self):
+		return '%s %s'%(str(self.IDALUMNO), self.IDCALIF)
+
+class CATHISTREP(models.Model):
+	IDALUMNO = models.ForeignKey(CATALUMNOS)
+	FECHA_SUBIDA = models.DateField(null=False)
+	TIPO_REP = models.CharField(max_length=20, null=False)
+
+
 class CATMAESTROS(models.Model):
 	IDMAESTRO = models.AutoField(primary_key=True)
 	IDPERSONA = models.ForeignKey(CATPERSONAS)
@@ -100,11 +101,11 @@ class CATMAESTROS(models.Model):
 		return '%s %s'%(str(self.IDMAESTRO), self.IDPERSONA)
 
 class ASIGNA_EMPRESA(models.Model):
-    IDASIGNA = models.AutoField(primary_key=True)
-    IDEMPRESA = models.ForeignKey(CATEMPRESAS)
-    IDALUMNO = models.ForeignKey(CATALUMNOS)
-    FECHA_VINCU = models.DateField(null=False)
-    FECHA_CAMBIO = models.DateField(null=True)
+	IDASIGNA = models.AutoField(primary_key=True)
+	IDEMPRESA = models.ForeignKey(CATEMPRESAS)
+	IDALUMNO = models.ForeignKey(CATALUMNOS)
+	FECHA_VINCU = models.DateField(null=False)
+	FECHA_CAMBIO = models.DateField(null=True)
 
-    def __str__(self):
-		return '%s %s %s'%(str(self.IDASIGNA), (self.IDEMPRESA), self.IDALUMNO)
+	def __str__(self):
+		return '%s %s'%(str(self.IDASIGNA), self.IDEMPRESA)

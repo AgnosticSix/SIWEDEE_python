@@ -53,12 +53,17 @@ class TIPOPERSONA(models.Model):
 		return '%s %s'%(str(self.IDTIPOPERSONA), self.NOMBRE)
 
 class CATPERSONAS(models.Model):
+	SEXO_CHOICE = (
+		('M','Masculino'),
+		('F','Femenino'),
+	)
+
 	IDPERSONA = models.AutoField(primary_key=True)
 	IDTIPOPERSONA = models.ForeignKey(TIPOPERSONA)
 	NOMBRE= models.CharField(max_length=50, null=False)
 	APELLIDO_PAT = models.CharField(max_length=50, null=False)
 	APELLIDO_MAT = models.CharField(max_length=50, null=True)
-	SEXO = models.CharField(max_length=1, null=False)
+	SEXO = models.CharField(max_length=1,choices=SEXO_CHOICE, null=False, default='M')
 	USUARIO = models.CharField(max_length=30, null=False)
 	PASSWORD = models.CharField(max_length=30, null=False)
 	ACTIVO = models.BooleanField(null=False)

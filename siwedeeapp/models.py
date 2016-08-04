@@ -67,7 +67,7 @@ class CATPERSONAS(models.Model):
 		return '%s %s'%(str(self.IDPERSONA), self.NOMBRE)
 
 class CATALUMNOS(models.Model):
-	IDALUMNO = models.ForeignKey(CATPERSONAS, primary_key=True)
+	IDALUMNO = models.OneToOneField(CATPERSONAS, primary_key=True)
 	MATRICULA = models.CharField(max_length=6, null=False)
 	IDPROCESO = models.ForeignKey(PROCESO)
 	IDCARRERA = models.ForeignKey(CATCARRERAS)

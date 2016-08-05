@@ -64,7 +64,7 @@ class CATPERSONAS(models.Model):
 	APELLIDO_PAT = models.CharField(max_length=50, null=False)
 	APELLIDO_MAT = models.CharField(max_length=50, null=True)
 	SEXO = models.CharField(max_length=1,choices=SEXO_CHOICE, null=False, default='M')
-	USUARIO = models.CharField(max_length=30, null=False)
+	USUARIO = models.CharField(max_length=30, null=False, unique=True)
 	PASSWORD = models.CharField(max_length=30, null=False)
 	ACTIVO = models.BooleanField(null=False)
 

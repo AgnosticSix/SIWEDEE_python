@@ -1,20 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
 from siwedeeapp.forms import LoginUsers
 from siwedeeapp.models import CATPERSONAS, TIPOPERSONA
 # Create your views here.
 
-def login(request):
+def loginUser(request):
 	if request.method=='POST':
 		form = LoginUsers(request.POST)
 		if form.is_valid():
 			try:
-				username = request.POST['username']
-				password = request.POST['password']
-				queryUser = CATPERSONAS.objects.filter(USUARIO=username, PASSWORD=password)
-				if queryUser:
+				userName = request.POST['username']
+				userPassword = request.POST['password']
+				accessUser = authenticate(username=userName, password=userPassword)
+				if accessUser is not None and accessUser.is_active:
+					login(request, user=accessUser)
+					queryUser = CATPERSONAS.objects.filter(USUARIO=userName, PASSWORD=userPassword)
 					tipoPersona = queryUser[0].IDTIPOPERSONA.NOMBRE
-					print('Funciona:',tipoPersona)
 					return HttpResponseRedirect('sesion')	#retorna a una vista, no programada
 			except Exception:
 				print( 'Exception capturada' )
